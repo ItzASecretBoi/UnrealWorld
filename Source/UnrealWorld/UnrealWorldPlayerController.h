@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "GameFramework/PlayerController.h"
+#include "UnrealWorldCharacter.h"
 #include "UnrealWorldPlayerController.generated.h"
 
 /** Forward declaration to improve compiling times */
@@ -38,14 +39,28 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	UInputAction* PanAction;
 	
-	/** Jump Input Action */
+	/** Zoom In*/
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
-	UInputAction* SetDestinationClickAction;
-
-	/** Jump Input Action */
+	UInputAction* ZoomInAction;
+	
+	/** Zoom Out*/
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
-	UInputAction* SetDestinationTouchAction;
+	UInputAction* ZoomOutAction;
+	
+	/** PrimaryClick Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
+	UInputAction* PrimaryCliok;
 
+	/** SecondaryClick */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
+	UInputAction* SecondaryClick;
+	
+	UPROPERTY(BlueprintReadOnly)
+	APawn* ControlledPawn;
+	
+	UPROPERTY(BlueprintReadOnly)
+	AActor* SelectedActor;
+	
 protected:
 	/** True if the controlled character should navigate to the mouse cursor. */
 	uint32 bMoveToMouseCursor : 1;
@@ -56,20 +71,31 @@ protected:
 	virtual void BeginPlay();
 
 	/** Input handlers for SetDestination action. */
-	void OnInputStarted();
-	void OnSetDestinationTriggered();
-	void OnSetDestinationReleased();
-	void OnTouchTriggered();
-	void OnTouchReleased();
+	void OnPrimaryInputStarted();
+	void OnPrimaryTriggered();
+	void OnPrimaryReleased();
+	
+	void OnSecondaryInputStarted();
+	void OnSecondaryTriggered();
+	void OnSecondaryReleased();
 	
 	void OnPanTriggered();
 	void OnPanReleased();
 
+	void ZoomIn();
+	void ZoomOut();
+	
 private:
 	FVector CachedDestination;
 
-	bool bIsTouch; // Is it a touch device
 	float FollowTime; // For how long it has been pressed
+	
+	
+	bool bIsPanning = false;
+	FVector2D LastPanMousePosition = FVector2D::ZeroVector;
+
+	UPROPERTY(EditAnywhere, Category = Camera)
+	float PanSpeed = 1.0f;
 };
 
 

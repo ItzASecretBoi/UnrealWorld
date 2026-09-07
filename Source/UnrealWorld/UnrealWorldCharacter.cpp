@@ -11,8 +11,23 @@
 #include "Materials/Material.h"
 #include "Engine/World.h"
 
+
+void AUnrealWorldCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
+	SelectionMesh = FindComponentByClass<UStaticMeshComponent>();
+	
+	
+	if (SelectionMesh)
+	{
+		SelectionMesh->SetHiddenInGame(true);
+	}
+}
+
 AUnrealWorldCharacter::AUnrealWorldCharacter()
 {
+	
 	// Set size for player capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
@@ -43,9 +58,33 @@ AUnrealWorldCharacter::AUnrealWorldCharacter()
 	// Activate ticking in order to update the cursor every frame.
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
+	
+	SelectionMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SelectionMesh"));
+	SelectionMesh->SetupAttachment(GetRootComponent());
+
+	SelectionMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	SelectionMesh->SetGenerateOverlapEvents(false);
+	SelectionMesh->SetHiddenInGame(true);
+	SelectionMesh->SetVisibility(true);
+	SelectionMesh->SetCastShadow(false);
+	SelectionMesh->SetRelativeLocation(FVector(0.f, 0.f, -88.f));
+	SelectionMesh->SetRelativeRotation(FRotator(0.f, 0.f, 0.f));
+	SelectionMesh->SetRelativeScale3D(FVector(1.0f, 1.0f, 1.0f));
+	
 }
 
 void AUnrealWorldCharacter::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
+}
+
+UStaticMeshComponent* AUnrealWorldCharacter::GetSelectionMesh() const
+{
+	return SelectionMesh;
+}
+
+void AUnrealWorldCharacter::Select(bool Show)
+{
+	SelectionMesh->SetHiddenInGame(!Show);
+	SelectionMesh->SetVisibility(Show);
 }
