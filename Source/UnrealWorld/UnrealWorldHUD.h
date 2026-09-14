@@ -25,7 +25,7 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TObjectPtr<UUnrealWorldArchitectMenu> ArchitectMenu;
 	
-	UPROPERTY(EditDefaultsOnly, Category = "UI")
+	UPROPERTY(EditAnywhere, Category = "UI")
 	TSubclassOf<UUnrealWorldArchitectMenu> ArchitectMenuClass;
 	
 protected:

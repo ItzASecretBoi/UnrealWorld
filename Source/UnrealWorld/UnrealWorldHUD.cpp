@@ -16,5 +16,12 @@ void AUnrealWorldHUD::BeginPlay()
 	{
 		ArchitectMenu->AddToViewport();
 	}
+	
+	if (!ArchitectMenu)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Architect menu: CreateWidget failed."));
+		return;
+	}
+	
 }
 
