@@ -11,6 +11,8 @@ UCGBlueprintAnimatorComponent::UCGBlueprintAnimatorComponent()
 	PrimaryComponentTick.bCanEverTick = true;
 
 	// ...
+	
+	
 }
 
 
