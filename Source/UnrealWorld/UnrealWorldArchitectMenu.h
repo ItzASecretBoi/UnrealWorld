@@ -17,7 +17,7 @@ class UNREALWORLD_API UUnrealWorldArchitectMenu : public UUserWidget
 	GENERATED_BODY()
 	
 public:
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TObjectPtr<UButton> ArchitectMenuButton;
 	
 	

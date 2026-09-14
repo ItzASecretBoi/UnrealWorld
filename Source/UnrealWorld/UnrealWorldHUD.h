@@ -11,6 +11,9 @@
 /**
  * 
  */
+ 
+ class UButton;
+ 
 UCLASS()
 class UNREALWORLD_API AUnrealWorldHUD : public AHUD
 {
@@ -19,9 +22,7 @@ class UNREALWORLD_API AUnrealWorldHUD : public AHUD
 	
 public:
 	
-	class UButton;
-	
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TObjectPtr<UUnrealWorldArchitectMenu> ArchitectMenu;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "UI")
