@@ -17,8 +17,14 @@ class UNREALWORLD_API UArchitectOption : public UUserWidget
 	GENERATED_BODY()
 	
 public:
+	virtual void NativeConstruct() override;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (BindWidget))
 	UImage* Image;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (BindWidget))
-	UButton* Button; 
+	UButton* Button;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	AActor* ActorToSpawn;
+	
+	UFUNCTION(BlueprintCallable)
+	void SpawnArchitectActor();
 };
