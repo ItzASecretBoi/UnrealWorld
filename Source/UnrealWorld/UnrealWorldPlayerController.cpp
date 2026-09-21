@@ -10,6 +10,7 @@
 #include "EnhancedInputComponent.h"
 #include "InputActionValue.h"
 #include "EnhancedInputSubsystems.h"
+#include "UnrealWorldInteractable.h"
 #include "Engine/LocalPlayer.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
@@ -82,7 +83,28 @@ void AUnrealWorldPlayerController::OnPrimaryTriggered()
 {
 	FHitResult Hit;
 	const bool bHitSuccessful = GetHitResultUnderCursor(ECC_Visibility, true, Hit);
+	
+	if (SelectedInteractableClass)
+	{
+		FActorSpawnParameters SpawnParams;
+		SpawnParams.Owner = this;
+		SpawnParams.Instigator = GetPawn();
 
+		const FVector ActorSpawnLocation = Hit.ImpactPoint;
+		const FRotator SpawnRotation = FRotator::ZeroRotator;
+
+		AUnrealWorldInteractable* Interactable =
+			GetWorld()->SpawnActor<AUnrealWorldInteractable>(
+				SelectedInteractableClass,
+				ActorSpawnLocation,
+				SpawnRotation,
+				SpawnParams
+			);
+		SelectedInteractableClass = nullptr;
+		return;
+	}
+	
+	
 	if (!bHitSuccessful)
 	{
 		return;

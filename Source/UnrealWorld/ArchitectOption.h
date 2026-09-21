@@ -6,6 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include "Components/Button.h"
 #include "Components/Image.h"
+#include "UnrealWorldHUD.h"
 #include "ArchitectOption.generated.h"
 
 /**
@@ -23,7 +24,7 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (BindWidget))
 	UButton* Button;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	AActor* ActorToSpawn;
+	TSubclassOf<AActor> ActorToSpawn;
 	
 	UFUNCTION(BlueprintCallable)
 	void SpawnArchitectActor();

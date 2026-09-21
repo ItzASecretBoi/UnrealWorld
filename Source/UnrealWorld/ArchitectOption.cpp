@@ -1,7 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
+#include "UnrealWorldHUD.h"
+#include "UnrealWorldCharacter.h"
+#include "UnrealWorldPlayer.h"
 #include "ArchitectOption.h"
+
+#include "UnrealWorldPlayerController.h"
 
 
 void UArchitectOption::NativeConstruct()
@@ -21,5 +26,11 @@ void UArchitectOption::NativeConstruct()
 
 void UArchitectOption::SpawnArchitectActor()
 {
-	UE_LOG(LogTemp, Log, TEXT("Hello from C++"));
+
+	AUnrealWorldPlayer* Player = Cast<AUnrealWorldPlayer>(GetOwningPlayer()->GetPawn());
+	AUnrealWorldPlayerController* PlayerController = Cast<AUnrealWorldPlayerController>(Player->GetController());
+	if (Player)
+	{
+		PlayerController->SelectedInteractableClass = ActorToSpawn;
+	}
 }
