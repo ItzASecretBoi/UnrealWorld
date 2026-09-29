@@ -2,7 +2,7 @@
 
 
 #include "UnrealWorldHUD.h"
-
+#include "Animation/AnimMontage.h"
 #include "UnrealWorldArchitectMenu.h"
 #include "Components/Button.h"
 #include "Blueprint/UserWidget.h"
@@ -22,6 +22,5 @@ void AUnrealWorldHUD::BeginPlay()
 		UE_LOG(LogTemp, Error, TEXT("Architect menu: CreateWidget failed."));
 		return;
 	}
-	
 }
 

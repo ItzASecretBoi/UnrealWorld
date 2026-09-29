@@ -30,7 +30,8 @@ public:
 	
 	UFUNCTION()
 	void Select(bool Show);
-	
+	void Dance();
+
 private:
 	/** Top down camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
@@ -39,5 +40,12 @@ private:
 	/** Camera boom positioning the camera above the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class USpringArmComponent* CameraBoom;
+
+protected:
+	UPROPERTY(EditAnywhere)
+	TObjectPtr<UAnimMontage> SpawnMontage;
+	
+	UPROPERTY(EditAnywhere)
+	TObjectPtr<UAnimMontage> DanceMontage;
 };
 

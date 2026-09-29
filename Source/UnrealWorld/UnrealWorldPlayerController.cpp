@@ -131,6 +131,7 @@ void AUnrealWorldPlayerController::OnPrimaryTriggered()
 
 	if (OldUnit == NewUnit)
 	{
+		OldUnit->Dance();
 		return;
 	}
 

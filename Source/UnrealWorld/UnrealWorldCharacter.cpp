@@ -24,6 +24,12 @@ void AUnrealWorldCharacter::BeginPlay()
 	{
 		SelectionMesh->SetHiddenInGame(true);
 	}
+	
+	if (SpawnMontage)
+	{
+		PlayAnimMontage(SpawnMontage);
+	}
+	
 }
 
 AUnrealWorldCharacter::AUnrealWorldCharacter()
@@ -88,5 +94,15 @@ void AUnrealWorldCharacter::Select(bool Show)
 {
 	SelectionMesh->SetHiddenInGame(!Show);
 	SelectionMesh->SetVisibility(Show);
+	
+}
+
+void AUnrealWorldCharacter::Dance()
+{
+	
+	if (DanceMontage)
+	{
+		PlayAnimMontage(DanceMontage);
+	}
 	
 }
